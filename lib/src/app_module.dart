@@ -1,12 +1,37 @@
-import 'package:flutter/material.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:poc_minsait/src/core/device/app_storage.dart';
+import 'package:poc_minsait/src/core/rest_client/interceptor/token_interceptor.dart';
+import 'package:poc_minsait/src/features/auth/auth_module.dart';
+import 'package:poc_minsait/src/features/home/home_module.dart';
+import 'package:poc_minsait/src/features/splash/splash_page.dart';
 
 class AppModule extends Module {
   @override
   void binds(Injector i) {
     super.binds(i);
-    i.add<AppStorage>(AppStorageImpl.new);
+    i.add<Dio>(
+      () => Dio(
+        BaseOptions(
+          baseUrl: 'http://10.0.2.2:8080',
+          connectTimeout: const Duration(seconds: 5),
+          receiveTimeout: const Duration(seconds: 60),
+        ),
+      )..interceptors.addAll(
+          [
+            TokenInterceptor(),
+            LogInterceptor(
+              requestBody: true,
+              responseBody: true,
+              requestHeader: true,
+              responseHeader: true,
+            ),
+          ],
+        ),
+    );
+    i.add(FlutterSecureStorage.new);
+    i.add(AppSecureStorage.new);
   }
 
   @override
@@ -14,9 +39,9 @@ class AppModule extends Module {
     super.routes(r);
     r.child(
       '/',
-      child: (_) => Container(
-        color: Colors.red,
-      ),
+      child: (_) => const SplashPage(),
     );
+    r.module('/auth', module: AuthModule());
+    r.module('/home', module: HomeModule());
   }
 }
