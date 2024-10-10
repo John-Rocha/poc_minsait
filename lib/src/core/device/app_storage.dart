@@ -1,35 +1,25 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
-abstract interface class AppStorage {
-  Future<void> write(String key, String value);
-  Future<String?> read(String key);
-  Future<void> delete(String key);
-  Future<void> deleteAll();
-}
+enum AppSecureStorageKeys { sessionToken }
 
-class AppStorageImpl implements AppStorage {
-  final FlutterSecureStorage _secureStorage;
+class AppSecureStorage {
+  final FlutterSecureStorage _storage;
 
-  AppStorageImpl({required FlutterSecureStorage secureStorage})
-      : _secureStorage = secureStorage;
+  AppSecureStorage({required FlutterSecureStorage storage})
+      : _storage = storage;
 
-  @override
-  Future<void> write(String key, String value) {
-    return _secureStorage.write(key: key, value: value);
+  Future<String?> getSessionToken() {
+    return _storage.read(key: AppSecureStorageKeys.sessionToken.name);
   }
 
-  @override
-  Future<String?> read(String key) {
-    return _secureStorage.read(key: key);
+  Future<void> setSessionToken(String token) {
+    return _storage.write(
+      key: AppSecureStorageKeys.sessionToken.name,
+      value: token,
+    );
   }
 
-  @override
-  Future<void> delete(String key) {
-    return _secureStorage.delete(key: key);
-  }
-
-  @override
-  Future<void> deleteAll() {
-    return _secureStorage.deleteAll();
+  Future<void> deleteSessionToken() {
+    return _storage.delete(key: AppSecureStorageKeys.sessionToken.name);
   }
 }
