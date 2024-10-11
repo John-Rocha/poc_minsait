@@ -1,4 +1,4 @@
-part of 'signup_cubit.dart';
+part of 'auth_cubit.dart';
 
 class SignupState extends Equatable {
   const SignupState({
@@ -9,6 +9,7 @@ class SignupState extends Equatable {
     required this.isLoading,
     this.errorMessage,
     this.userEntity,
+    this.authEntity,
   });
 
   final FullName fullName;
@@ -18,6 +19,7 @@ class SignupState extends Equatable {
   final bool isLoading;
   final String? errorMessage;
   final UserEntity? userEntity;
+  final AuthEntity? authEntity;
 
   const SignupState.empty()
       : fullName = const FullName.pure(),
@@ -26,7 +28,8 @@ class SignupState extends Equatable {
         confirmPassword = const Password.pure(),
         isLoading = false,
         errorMessage = null,
-        userEntity = null;
+        userEntity = null,
+        authEntity = null;
 
   bool get isSignupValid =>
       Formz.validate([
@@ -50,6 +53,7 @@ class SignupState extends Equatable {
     bool? isLoading,
     String? errorMessage,
     UserEntity? userEntity,
+    AuthEntity? authEntity,
   }) {
     return SignupState(
       fullName: fullName ?? this.fullName,
@@ -59,6 +63,7 @@ class SignupState extends Equatable {
       isLoading: isLoading ?? this.isLoading,
       errorMessage: errorMessage ?? this.errorMessage,
       userEntity: userEntity ?? this.userEntity,
+      authEntity: authEntity ?? this.authEntity,
     );
   }
 
@@ -71,5 +76,6 @@ class SignupState extends Equatable {
         isLoading,
         errorMessage,
         userEntity,
+        authEntity,
       ];
 }

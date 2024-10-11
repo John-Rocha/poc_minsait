@@ -2,17 +2,23 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 import 'package:poc_minsait/src/core/models/models.dart';
+import 'package:poc_minsait/src/features/auth/domain/entities/auth_entity.dart';
 import 'package:poc_minsait/src/features/auth/domain/entities/user_entity.dart';
+import 'package:poc_minsait/src/features/auth/domain/usecases/signin_usecase.dart';
 import 'package:poc_minsait/src/features/auth/domain/usecases/signup_usecase.dart';
 
-part 'signup_state.dart';
+part 'auth_state.dart';
 
 class SignupCubit extends Cubit<SignupState> {
-  SignupCubit({required SignupUsecase signupUsecase})
-      : _signupUsecase = signupUsecase,
+  SignupCubit({
+    required SignupUsecase signupUsecase,
+    required SigninUsecase signinUsecase,
+  })  : _signupUsecase = signupUsecase,
+        _signinUsecase = signinUsecase,
         super(const SignupState.empty());
 
   final SignupUsecase _signupUsecase;
+  final SigninUsecase _signinUsecase;
 
   void onFullNameChanged(String value) {
     final fullName = FullName.dirty(value);
@@ -64,6 +70,36 @@ class SignupCubit extends Cubit<SignupState> {
           state.copyWith(
             isLoading: false,
             userEntity: userEntity,
+          ),
+        );
+      },
+    );
+  }
+
+  Future<void> signin() async {
+    emit(state.copyWith(isLoading: true));
+
+    await Future.delayed(const Duration(seconds: 2));
+
+    final result = await _signinUsecase(
+      email: state.email.value,
+      password: state.password.value,
+    );
+
+    result.fold(
+      (error) {
+        emit(
+          state.copyWith(
+            isLoading: false,
+            errorMessage: error.message,
+          ),
+        );
+      },
+      (authEntity) {
+        emit(
+          state.copyWith(
+            isLoading: false,
+            authEntity: authEntity,
           ),
         );
       },
