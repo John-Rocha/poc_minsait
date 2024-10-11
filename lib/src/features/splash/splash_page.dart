@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:poc_minsait/src/core/device/app_storage.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -9,14 +10,20 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
+  final appStorage = Modular.get<AppSecureStorage>();
+
   @override
   void initState() {
     super.initState();
-
-    Future.delayed(
-      const Duration(seconds: 3),
-      () => Modular.to.navigate('/auth'),
-    );
+    Future.delayed(const Duration(seconds: 2), () {
+      appStorage.getSessionToken().then((token) {
+        if (token != null) {
+          Modular.to.navigate('/home');
+        } else {
+          Modular.to.navigate('/auth');
+        }
+      });
+    });
   }
 
   @override
