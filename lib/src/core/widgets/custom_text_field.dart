@@ -8,6 +8,7 @@ class CustomTextField extends StatefulWidget {
     this.errorText,
     this.prefixIcon,
     this.enabled = true,
+    this.readonly = false,
     this.inputFormatters,
     this.onChanged,
     this.keyboardType,
@@ -24,6 +25,7 @@ class CustomTextField extends StatefulWidget {
   final Widget? prefixIcon;
   final bool isPasswordField;
   final bool enabled;
+  final bool readonly;
   final List<TextInputFormatter>? inputFormatters;
   final void Function(String value)? onChanged;
   final TextInputType? keyboardType;
@@ -41,6 +43,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
       initialValue: widget.initialValue,
       keyboardType: widget.keyboardType,
       obscureText: widget.isPasswordField && _isObscure ? true : false,
+      readOnly: widget.readonly,
       decoration: InputDecoration(
         label: Text(widget.label),
         enabled: widget.enabled,
