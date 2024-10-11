@@ -16,7 +16,7 @@ class AuthModule extends Module {
     i.addLazySingleton<AuthRepository>(AuthRepositoryImpl.new);
     i.addLazySingleton<SignupUsecase>(SignupUsecaseImpl.new);
     i.addLazySingleton<SigninUsecase>(SigninUsecaseImpl.new);
-    i.addLazySingleton(SignupCubit.new);
+    i.addLazySingleton(AuthCubit.new);
   }
 
   @override

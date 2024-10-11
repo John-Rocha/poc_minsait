@@ -1,7 +1,7 @@
 part of 'auth_cubit.dart';
 
-class SignupState extends Equatable {
-  const SignupState({
+class AuthState extends Equatable {
+  const AuthState({
     required this.fullName,
     required this.email,
     required this.password,
@@ -21,7 +21,7 @@ class SignupState extends Equatable {
   final UserEntity? userEntity;
   final AuthEntity? authEntity;
 
-  const SignupState.empty()
+  const AuthState.empty()
       : fullName = const FullName.pure(),
         email = const Email.pure(),
         password = const Password.pure(),
@@ -45,7 +45,7 @@ class SignupState extends Equatable {
         password,
       ]);
 
-  SignupState copyWith({
+  AuthState copyWith({
     FullName? fullName,
     Email? email,
     Password? password,
@@ -55,7 +55,7 @@ class SignupState extends Equatable {
     UserEntity? userEntity,
     AuthEntity? authEntity,
   }) {
-    return SignupState(
+    return AuthState(
       fullName: fullName ?? this.fullName,
       email: email ?? this.email,
       password: password ?? this.password,

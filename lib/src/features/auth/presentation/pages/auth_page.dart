@@ -19,12 +19,12 @@ class AuthPage extends StatefulWidget {
 class _AuthPageState extends State<AuthPage> {
   bool _isLogin = true;
 
-  late final SignupCubit _signupCubit;
+  late final AuthCubit _signupCubit;
 
   @override
   void initState() {
     super.initState();
-    _signupCubit = Modular.get<SignupCubit>();
+    _signupCubit = Modular.get<AuthCubit>();
   }
 
   @override
@@ -42,7 +42,7 @@ class _AuthPageState extends State<AuthPage> {
               minHeight: MediaQuery.of(context).size.height,
             ),
             child: IntrinsicHeight(
-              child: BlocConsumer<SignupCubit, SignupState>(
+              child: BlocConsumer<AuthCubit, AuthState>(
                 bloc: _signupCubit,
                 listener: (context, state) {
                   if (state.errorMessage != null) {

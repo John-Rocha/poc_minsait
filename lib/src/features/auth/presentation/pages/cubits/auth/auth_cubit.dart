@@ -9,13 +9,13 @@ import 'package:poc_minsait/src/features/auth/domain/usecases/signup_usecase.dar
 
 part 'auth_state.dart';
 
-class SignupCubit extends Cubit<SignupState> {
-  SignupCubit({
+class AuthCubit extends Cubit<AuthState> {
+  AuthCubit({
     required SignupUsecase signupUsecase,
     required SigninUsecase signinUsecase,
   })  : _signupUsecase = signupUsecase,
         _signinUsecase = signinUsecase,
-        super(const SignupState.empty());
+        super(const AuthState.empty());
 
   final SignupUsecase _signupUsecase;
   final SigninUsecase _signinUsecase;
@@ -107,6 +107,6 @@ class SignupCubit extends Cubit<SignupState> {
   }
 
   void resetState() {
-    emit(const SignupState.empty());
+    emit(const AuthState.empty());
   }
 }
