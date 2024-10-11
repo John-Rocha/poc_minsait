@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
+import 'package:poc_minsait/src/core/device/app_storage.dart';
 import 'package:poc_minsait/src/core/models/models.dart';
 import 'package:poc_minsait/src/features/auth/domain/entities/auth_entity.dart';
 import 'package:poc_minsait/src/features/auth/domain/entities/user_entity.dart';
@@ -13,12 +14,15 @@ class AuthCubit extends Cubit<AuthState> {
   AuthCubit({
     required SignupUsecase signupUsecase,
     required SigninUsecase signinUsecase,
+    required AppSecureStorage appSecureStorage,
   })  : _signupUsecase = signupUsecase,
         _signinUsecase = signinUsecase,
+        _appSecureStorage = appSecureStorage,
         super(const AuthState.empty());
 
   final SignupUsecase _signupUsecase;
   final SigninUsecase _signinUsecase;
+  final AppSecureStorage _appSecureStorage;
 
   void onFullNameChanged(String value) {
     final fullName = FullName.dirty(value);
@@ -108,5 +112,10 @@ class AuthCubit extends Cubit<AuthState> {
 
   void resetState() {
     emit(const AuthState.empty());
+  }
+
+  Future<void> logout() async {
+    await _appSecureStorage.deleteSessionToken();
+    emit(state.copyWith(authEntity: null));
   }
 }
