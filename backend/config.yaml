@@ -7,6 +7,6 @@ auth:
   jwtSecret: cwsMXDtuP447WZQ63nM4dWZ3RppyMl
   jwtExpire: 3600
   unauthorizedStatusCode: 403
-  # urlSkip:
-  #   - /users:
-  #       method: post
+  urlSkip:
+    - /users:
+        method: post
