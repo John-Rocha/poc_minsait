@@ -41,6 +41,7 @@ dependencies:
   equatable: ^2.0.5
   dartz: ^0.10.1
   formz: ^0.7.0
+  brasil_fields: ^1.15.0
 
 dev_dependencies:
   flutter_test:
