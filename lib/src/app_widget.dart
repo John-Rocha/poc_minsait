@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:poc_minsait/src/core/theme/app_theme.dart';
 
 class AppWidget extends StatelessWidget {
   const AppWidget({super.key});
@@ -10,23 +11,7 @@ class AppWidget extends StatelessWidget {
       title: 'Teste Minsait',
       debugShowCheckedModeBanner: false,
       routerConfig: Modular.routerConfig,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color(0xFF1b3b48),
-        ),
-        appBarTheme: const AppBarTheme(
-          backgroundColor: Color(0xFF1b3b48),
-          iconTheme: IconThemeData(
-            color: Colors.white,
-          ),
-          titleTextStyle: TextStyle(
-            color: Colors.white,
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        useMaterial3: true,
-      ),
+      theme: AppTheme.theme,
     );
   }
 }
