@@ -57,37 +57,46 @@ class _HomePageState extends State<HomePage> {
                 );
               }
 
-              return RefreshIndicator(
-                onRefresh: _homePageCubit.getPersons,
-                child: ListView.separated(
-                  itemCount: state.persons.length,
-                  separatorBuilder: (context, index) => const Divider(),
-                  itemBuilder: (context, index) {
-                    final person = state.persons[index];
-                    return ListTile(
-                      title: Text(
-                        person.name,
-                        style: const TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                        ),
+              if (state.persons.isEmpty) {
+                return const Center(
+                  child: Text('Nenhum usuário cadastrado'),
+                );
+              }
+
+              return ListView.separated(
+                itemCount: state.persons.length,
+                separatorBuilder: (context, index) => const Divider(),
+                itemBuilder: (context, index) {
+                  final person = state.persons[index];
+                  return ListTile(
+                    title: Text(
+                      person.name,
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
                       ),
-                      subtitle: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(person.cpf),
-                          Text(person.birthDate),
-                        ],
-                      ),
-                    );
-                  },
-                ),
+                    ),
+                    subtitle: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(person.cpf),
+                        Text(person.birthDate),
+                      ],
+                    ),
+                  );
+                },
               );
             },
           ),
           floatingActionButton: FloatingActionButton(
-            onPressed: () {
-              Modular.to.pushNamed('./form');
+            onPressed: () async {
+              await Modular.to.pushNamed<bool>('./form').then(
+                (value) {
+                  if (value != null) {
+                    _homePageCubit.getPersons();
+                  }
+                },
+              );
             },
             child: const Icon(Icons.add),
           ),

@@ -14,7 +14,7 @@ class HomePageCubit extends Cubit<HomePageState> {
 
   Future<void> getPersons() async {
     emit(state.copyWith(isLoading: true));
-    final result = await _getPersonsUsecase.call();
+    final result = await _getPersonsUsecase();
 
     result.fold(
       (error) {

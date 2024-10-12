@@ -54,7 +54,9 @@ class _AuthPageState extends State<AuthPage> {
                   }
 
                   if (state.userEntity != null) {
-                    Modular.to.navigate('/home');
+                    setState(() {
+                      _isLogin = true;
+                    });
                   }
 
                   if (state.authEntity != null) {

@@ -46,7 +46,7 @@ class _FormPageState extends State<FormPage> {
         }
 
         if (state.isSaved) {
-          Modular.to.pop();
+          Modular.to.pop(true);
         }
       },
       builder: (context, state) {

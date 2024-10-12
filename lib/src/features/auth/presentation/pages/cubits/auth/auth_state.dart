@@ -61,9 +61,9 @@ class AuthState extends Equatable {
       password: password ?? this.password,
       confirmPassword: confirmPassword ?? this.confirmPassword,
       isLoading: isLoading ?? this.isLoading,
-      errorMessage: errorMessage ?? this.errorMessage,
-      userEntity: userEntity ?? this.userEntity,
-      authEntity: authEntity ?? this.authEntity,
+      errorMessage: errorMessage,
+      userEntity: userEntity,
+      authEntity: authEntity,
     );
   }
 
