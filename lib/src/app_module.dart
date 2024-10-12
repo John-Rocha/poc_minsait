@@ -2,7 +2,6 @@ import 'package:dio/dio.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:poc_minsait/src/core/device/app_storage.dart';
-import 'package:poc_minsait/src/core/rest_client/interceptor/token_interceptor.dart';
 import 'package:poc_minsait/src/features/auth/auth_module.dart';
 import 'package:poc_minsait/src/features/home/home_module.dart';
 import 'package:poc_minsait/src/features/splash/splash_page.dart';
@@ -20,7 +19,6 @@ class AppModule extends Module {
         ),
       )..interceptors.addAll(
           [
-            TokenInterceptor(),
             LogInterceptor(
               requestBody: true,
               responseBody: true,
