@@ -31,7 +31,7 @@ class AuthDatesourceImpl implements AuthDatesource {
   }) async {
     try {
       final response = await _restClient.post(
-        'http://10.0.2.2:8080/users',
+        '/users',
         data: {
           'name': name,
           'email': email,
@@ -57,7 +57,7 @@ class AuthDatesourceImpl implements AuthDatesource {
   }) async {
     try {
       final response = await _restClient.post(
-        'http://10.0.2.2:8080/auth',
+        '/auth',
         data: {
           'email': email,
           'password': password,

@@ -35,7 +35,7 @@ class PersonDatasourceImpl implements PersonDatasource {
         ),
       );
       final response = await _restClient.post(
-        'http://10.0.2.2:8080/persons',
+        '/persons',
         data: {
           'document': person.cpf,
           'fullName': person.name,
@@ -71,7 +71,7 @@ class PersonDatasourceImpl implements PersonDatasource {
           appSecureStorage: _appSecureStorage,
         ),
       );
-      final response = await _restClient.get('http://10.0.2.2:8080/persons');
+      final response = await _restClient.get('/persons');
 
       if (response.statusCode != 200) {
         throw Exception('Erro ao buscar as pessoas');
