@@ -6,4 +6,6 @@ abstract interface class PersonRepository {
   Future<Either<Failure, PersonEntity>> createPerson({
     required PersonEntity person,
   });
+
+  Future<Either<Failure, List<PersonEntity>>> getPersons();
 }

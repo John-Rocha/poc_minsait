@@ -6,7 +6,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:poc_minsait/src/core/models/models.dart';
 import 'package:poc_minsait/src/core/widgets/custom_text_button.dart';
 import 'package:poc_minsait/src/core/widgets/custom_text_field.dart';
-import 'package:poc_minsait/src/features/home/presentation/cubit/form_page_cubit.dart';
+import 'package:poc_minsait/src/features/home/presentation/cubits/form_page/form_page_cubit.dart';
 
 class FormPage extends StatefulWidget {
   const FormPage({super.key});

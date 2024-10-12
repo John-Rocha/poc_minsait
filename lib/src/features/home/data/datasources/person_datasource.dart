@@ -66,6 +66,11 @@ class PersonDatasourceImpl implements PersonDatasource {
   @override
   Future<List<PersonModel>> getPersons() async {
     try {
+      _restClient.interceptors.add(
+        TokenInterceptor(
+          appSecureStorage: _appSecureStorage,
+        ),
+      );
       final response = await _restClient.get('/persons');
 
       if (response.statusCode != 200) {

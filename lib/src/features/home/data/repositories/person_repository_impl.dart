@@ -16,8 +16,28 @@ class PersonRepositoryImpl implements PersonRepository {
   }) async {
     try {
       final result = await _personDatasource.createPerson(person: person);
-
       return Right(result);
+    } on Failure catch (e) {
+      return Left(Failure(message: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<PersonEntity>>> getPersons() async {
+    try {
+      final result = await _personDatasource.getPersons();
+
+      final persons = result
+          .map<PersonEntity>(
+            (person) => PersonEntity(
+              cpf: person.cpf,
+              name: person.name,
+              birthDate: person.birthDate,
+              address: person.address,
+            ),
+          )
+          .toList();
+      return Right(persons);
     } on Failure catch (e) {
       return Left(Failure(message: e.toString()));
     }
