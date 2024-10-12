@@ -4,11 +4,13 @@ import 'package:flutter/services.dart';
 class CustomTextField extends StatefulWidget {
   const CustomTextField({
     required this.label,
+    this.controller,
     this.initialValue,
     this.errorText,
     this.prefixIcon,
     this.enabled = true,
     this.readonly = false,
+    this.maxLength,
     this.inputFormatters,
     this.onChanged,
     this.keyboardType,
@@ -19,6 +21,7 @@ class CustomTextField extends StatefulWidget {
           'Prefix icon não pode ser definido quando o campo está desabilitado.',
         );
 
+  final TextEditingController? controller;
   final String? initialValue;
   final String label;
   final String? errorText;
@@ -26,6 +29,7 @@ class CustomTextField extends StatefulWidget {
   final bool isPasswordField;
   final bool enabled;
   final bool readonly;
+  final int? maxLength;
   final List<TextInputFormatter>? inputFormatters;
   final void Function(String value)? onChanged;
   final TextInputType? keyboardType;
@@ -40,10 +44,12 @@ class _CustomTextFieldState extends State<CustomTextField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: widget.controller,
       initialValue: widget.initialValue,
       keyboardType: widget.keyboardType,
       obscureText: widget.isPasswordField && _isObscure ? true : false,
       readOnly: widget.readonly,
+      maxLength: widget.maxLength,
       decoration: InputDecoration(
         label: Text(widget.label),
         enabled: widget.enabled,
