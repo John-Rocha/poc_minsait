@@ -64,7 +64,7 @@ void main() {
           'Apto 202',
           'Centro',
           'Cidade Exemplo',
-          'EX'
+          'EX',
         ],
       );
     });

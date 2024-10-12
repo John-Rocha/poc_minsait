@@ -155,7 +155,7 @@ class _AuthPageState extends State<AuthPage> {
                                       : null,
                             ),
                             const SizedBox(height: 20),
-                            CustomOutlinedButton(
+                            CustomTextButton(
                               label: _isLogin
                                   ? 'Não tem uma conta? Cadastre-se'
                                   : 'Já tem uma conta? Entrar',
